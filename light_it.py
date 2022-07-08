@@ -59,22 +59,26 @@ class Computer(Player):
             act = [self.heal, self.crit_hit, self.hit]
             return choice(act)()
 
-player = Player()  # создаём персонажей
-computer = Computer()
-
-def play(player1, player2):   #функция самой игры
-    fu = [player1.action, player2.action]
-    g = choice(fu)() #случайный ход копьютер или игрок
-    print(g[3], g[1], g[2],'\n','Здоровье', g[4]+'а', g[0])
-    if int(g[0]) > 0:
-        return play(player1, player2) #если все живы, продолжаем
+def play(player1, player2):  # функция самой игры
+    players = [player1.action, player2.action]
+    player_action = choice(players)()  # случайный ход копьютер или игрок
+    print(player_action)
+    print(player_action[3], player_action[1], player_action[2], '\n', 'Здоровье', player_action[4] + 'а',
+          player_action[0])
+    if int(player_action[0]) > 0:
+        return play(player1, player2)  # если все живы, продолжаем
     else:
-        if player1.health<=0:
+        if player1.health <= 0:
             return 'Компьтер победил'
         else:
             return 'Игрок победил'
 
-print(play(player, computer))
+
+if __name__ == "__main__":
+    player = Player()  # создаём персонажей
+    computer = Computer()
+    print(choice(list(player.damage)), choice(list(computer.damage)))
+    print(play(player, computer))
 
 
 
