@@ -19,14 +19,14 @@ class Players_stats:
         self.name = ''
         self.enemy = ''
         self.health = 100
-        self.damage = (x for x in range(18, 26))
-        self.crit = (x for x in range(10, 36))
+        self.damage = [x for x in range(18, 26)]
+        self.crit = [x for x in range(10, 36)]
 
 
 class Players_hit:
     """Удар"""
     def hit(self):
-        step = choice(list(self.damage))
+        step = choice(self.damage)
         self.health = self.health - step
         return self.health, 'нанес удар', step, self.enemy, self.name
 
@@ -34,7 +34,7 @@ class Players_hit:
 class Players_heal:
     """Лечение"""
     def heal(self):
-        step = choice(list(self.damage))
+        step = choice(self.damage)
         self.health = self.health + step
         return self.health, 'выличился', step, self.name, self.name
 
@@ -42,7 +42,7 @@ class Players_heal:
 class Players_crit_hit:
     """Критический удар"""
     def crit_hit(self):
-        step = choice(list(self.crit))
+        step = choice(self.crit)
         self.health = self.health - step
         return self.health, 'нанес размашистый удар', step, self.enemy, self.name
 
